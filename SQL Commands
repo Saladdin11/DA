@@ -1,0 +1,118 @@
+Select Distinct (Variable) 
+From Table 
+shows us unique values for a specific coloumn / variable
+
+Select Count (coloumn) 
+From Table 
+shows us number of non null values 
+
+ select Max (salary)
+ From EmployeeSalary
+ 
+  select Min (salary)
+ From EmployeeSalary
+ 
+  select AVG (salary)
+ From EmployeeSalary
+ 
+ Where function:
+ Select* 
+From EmployeeDemographics
+Where Age > 30 
+
+Select* 
+From EmployeeDemographics
+Where Age >= 30
+to include people aged 30 too
+
+Select* 
+From EmployeeDemographics1
+Where FirstName Like 'a%' 
+slect data where first name starts with A
+
+Select* 
+From EmployeeDemographics1
+Where FirstName Like '%a%' 
+requests data where thereis an A anywhere in the name 
+
+Select* 
+From EmployeeDemographics1
+Where FirstName Like 'S%A%' 
+select data where S at beginning of name and A anywhere in the name
+
+Select* 
+From EmployeeDemographics1
+Where FirstName is  null
+checks coloum for any null data points 
+
+Select* 
+From EmployeeDemographics1
+Where FirstName In ('Jim', 'Michael', 'pam') 
+in can be used as an = statement but quicker to type and easier to use rather than keep tpying out AND 
+
+Group by function:
+
+Select Gender
+From EmployeeDemographics1
+Group by Gender
+
+Select Gender, COUNT (Gender)
+From EmployeeDemographics1
+Group by Gender
+this shows the 2 genders and lists the number of people in each group 
+
+Select Gender, Age, COUNT (Gender)
+From EmployeeDemographics1
+Group by Gender, Age
+ 
+ 
+ Select gender, Count (Gender) as CountGender 
+From EmployeeDemographics1
+Where Age > 31 
+Group By Gender
+Order by Gender desc
+this creates a table where gender and number of people in that gender are in a table, decending from highest to lowest 
+if you want it to be ascending just remove DESC or replace it with ACS
+
+select *
+from EmployeeDemographics1
+Order by Age, gender 
+produces a table where all data is ordered b begining with smallest first
+
+Can ALSO USE 
+select *
+from EmployeeDemographics1
+Order by 4, 5
+BECAUSE AGE IS COLOUMN 4 AND GENDER IS COLOUMN 5 
+
+INNER JOIN CODE       - shows all data common in both tables 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1       - select first table 
+INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       - join table 2 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       - enter command to join on common coloumn used in both tables 
+
+FULL OUTER JOIN    - shows all data points from both tables including non common data 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1
+Full outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
+LEFT OUTER JOIN   - Shows all data from the left table and anything else overlapping both tables 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1
+left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
+RIGHT OUTER JOIN        - makes table 2 the main table in the results 
+ SELECT * 
+fROM EmployeeDemographics1
+Right outer JOIN EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+ 
+
+SELECT JobTitle, avg(Salary)
+fROM EmployeeDemographics1
+Inner JOIN EmployeeSalary
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+Where JobTitle = 'salesman' 
+Group by JobTitle
