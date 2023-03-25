@@ -1,0 +1,83 @@
+Calculate Average salary:
+
+SELECT JobTitle, avg(Salary)
+fROM EmployeeDemographics1
+Inner JOIN EmployeeSalary
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+Where JobTitle = 'salesman' 
+Group by JobTitle
+
+
+Merging tables with Union       - this produces a merged table where duplicates are removed
+
+Select *
+From EmployeeDemographics1
+Union
+Select *
+From WareHouseEmployeeDemographics
+order by EmployeeID
+
+To merge tables and include duplicates:
+Select *
+From EmployeeDemographics1
+Union All
+Select *
+From WareHouseEmployeeDemographics
+order by EmployeeID
+
+
+CASE STATEMENTS:    - To specifiy condition and specifiy what you want returned when that condition is met 
+E.G when age is more than 30 then label old or young. 
+
+Select FirstName, LastName, Age,
+Case 
+When Age > 30 Then 'Old' Else 'Young' 
+End 
+FROM EmployeeDemographics1
+WHERE AGE IS NOT NULL 
+ORDER BY AGE 
+
+Example 2 
+
+Select FirstName, LastName, Age,
+Case 
+When Age > 30 Then 'Old' 
+When age between 27 and 30 then 'young' Else 'Baby'  -
+End 
+FROM EmployeeDemographics1
+WHERE AGE IS NOT NULL 
+ORDER BY AGE 
+
+WE can keep adding Whens but first 'when' is what SQL sees as most important
+
+ADDING A RAISE TO EVERYONES SALARY - EXAMPLES
+
+Select FirstName, LastName, JobTitle, Salary,
+Case
+	WHEN Jobtitle = 'Salesman' Then Salary + (Salary * .10)
+	When Jobtitle = 'Accountant' Then Salary + (Salary * 0.05) 
+	When  Jobtitle = 'HR' Then Salary + (Salary * 0.00001) 
+Else Salary + (Salary * 0.03)
+End as SalaryAfterRaise
+FROM EmployeeDemographics1
+join EmployeeSalary
+on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
+HAVING CLAUSE 
+
+Select JobTitle, Count(JobTitle) 
+FROM EmployeeDemographics1
+Join EmployeeSalary 
+on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+Group BY JobTitle 
+HAVING COUNT(JOBTITLE) > 1 
+
+Select JobTitle, avg(Salary) 
+FROM EmployeeDemographics1
+Join EmployeeSalary 
+on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+Group BY JobTitle
+HAVING AVG(SALARY) > 40000        MUST COME AFTER GROUP BY STATEMENT 
+ORDER BY AVG(SALARY)   
+
+
