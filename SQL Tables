@@ -37,3 +37,19 @@ Insert Into EmployeeSalary VALUES
 (1007, 'Supplier Relations', 41000),
 (1008, 'Salesman', 48000),
 (1009, 'Accountant', 42000)
+
+EDITTING / UPDATING TABLES 
+This code changes holly ID to 1020  and edits her age and gender 
+update EmployeeDemographics1
+set EmployeeID = 1020
+Set Age = 38, Gender = 'Female'
+where firstname = 'Holly' and LastName = 'Flax' 
+
+DELETING ROWS 
+Delete From EmployeeDemographics1 
+where EmployeeID = 1006
+
+ 
+
+
+
