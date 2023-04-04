@@ -115,3 +115,12 @@ FROM EmployeeDemographics1 AS DEMO
 JOIN EmployeeSalary AS SAL
 ON DEMO.EmployeeID = SAL.EMPLOYEEID		Here we are looking at employee ID and Salary in a joined tbale but using alias names (Sal and Demo) 
 						
+
+EXAMPLE 2 - with joins and 3 tables 
+
+SELECT DEMO.EMPLOYEEID, Demo.firstname, SAL.Salary, ware.age
+FROM EmployeeDemographics1 AS DEMO
+Left JOIN EmployeeSalary AS SAL
+ON DEMO.EmployeeID = SAL.EMPLOYEEID
+left join WareHouseEmployeeDemographics as ware
+on demo.EmployeeID = ware.EmployeeID
