@@ -122,3 +122,22 @@ Group by JobTitle
                                          new temp table                               
 Select * 
 From #TEMP_EMPLOYEE2
+
+    ALL TOGETHER: -
+    
+ DROP TABLE IF EXISTS #TEMP_Employee2         adding this line in allows us to keep executing script, it deletes Temp-employee2 and then re-creates it
+CREATE TABLE #TEMP_EMPLOYEE2 (
+JobTitle Varchar(50), EmployeesPerJob int,
+AvgAge int,
+AvgSalary int)
+
+INSERT into #TEMP_EMPLOYEE2  
+SELECT JobTitle, COUNT(JobTitle), Avg(Age), AVG(Salary)
+FROM EmployeeDemographics1 AS DEMO
+JOIN EmployeeSalary AS SAL
+ON DEMO.EmployeeID = SAL.EMPLOYEEID
+Group by JobTitle
+
+Select * 
+From #TEMP_EMPLOYEE2
+
