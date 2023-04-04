@@ -103,5 +103,15 @@ TO COMBINE FIRST NAME AND LAST NAME COLOUMNS INTO ONE TEMPORARILY:
 SELECT FIRSTNAME + ' ' + LASTNAME AS FULLNAME
 FROM EmployeeDemographics1
 				the ' ' is added to add a space between the first name and last name of each person in the coloumn 
-		
-		
+
+		TO CALCULATE AVERAGE AGE AND NAME THE RESULT TABLE WITH 'AVGAGE'
+SELECT avg(age) as avgage
+FROM EmployeeDemographics1
+
+	AN EXAMPLE OF USING ALIASING FOR TABLE NAMES AND COLOUMN NAMES	
+
+SELECT DEMO.EMPLOYEEID, SAL.Salary
+FROM EmployeeDemographics1 AS DEMO
+JOIN EmployeeSalary AS SAL
+ON DEMO.EmployeeID = SAL.EMPLOYEEID		Here we are looking at employee ID and Salary in a joined tbale but using alias names (Sal and Demo) 
+						
