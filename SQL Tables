@@ -70,5 +70,30 @@ DELETING DATA - ALways be careful because you cannot undo this
 Delete from EmployeeDemographics1
 Where EmployeeID = 1005  
 
+                                      MERGING TABLES TOGETHER
 
+INNER JOIN CODE       - shows all data common in both tables 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1       - select first table 
+INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       - join table 2 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       - enter command to join on common coloumn used in both tables 
+
+FULL OUTER JOIN    - shows all data points from both tables including non common data 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1
+Full outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
+LEFT OUTER JOIN   - Shows all data from the left table and anything else overlapping both tables 
+SELECT * 
+fROM [SQL tutorial].dbo.EmployeeDemographics1
+left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
+RIGHT OUTER JOIN        - makes table 2 the main table in the results 
+ SELECT * 
+fROM EmployeeDemographics1
+Right outer JOIN EmployeeSalary 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+ 
 
