@@ -85,34 +85,32 @@ from EmployeeDemographics1
 Order by 4, 5
 BECAUSE AGE IS COLOUMN 4 AND GENDER IS COLOUMN 5 
 
-INNER JOIN CODE       - shows all data common in both tables 
-SELECT * 
-fROM [SQL tutorial].dbo.EmployeeDemographics1       - select first table 
-INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       - join table 2 
-ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       - enter command to join on common coloumn used in both tables 
 
-FULL OUTER JOIN    - shows all data points from both tables including non common data 
-SELECT * 
-fROM [SQL tutorial].dbo.EmployeeDemographics1
-Full outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
-ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
-
-LEFT OUTER JOIN   - Shows all data from the left table and anything else overlapping both tables 
-SELECT * 
-fROM [SQL tutorial].dbo.EmployeeDemographics1
-left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
-ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
-
-RIGHT OUTER JOIN        - makes table 2 the main table in the results 
- SELECT * 
-fROM EmployeeDemographics1
-Right outer JOIN EmployeeSalary 
-ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
  
 
+    A TABLE FOR AVERAGE SALARY OF SALESMAN - made from 2 tables - emplyoee demographiscs and employee salary table
 SELECT JobTitle, avg(Salary)
 fROM EmployeeDemographics1
 Inner JOIN EmployeeSalary
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 Where JobTitle = 'salesman' 
 Group by JobTitle
+
+
+        PARTITION BY STATEMENTS: ALLOWS US TO EASILY ADD A NEW COLOUMN INTO A TABLE WHILE KEEPING THE NUMBER OF ROWS THE SAME 
+EXAMPLE:
+select FirstName, LASTNAME, GENDER, SALARY, 
+COUNT(GENDER) OVER (PARTITION BY GENDER) AS TOTALGENDER
+From EmployeeDemographics1 DEM
+JOIN employeeSalary SAL
+ON DEM.EmployeeID = SAL.EmployeeID
+        THIS PRODUCES A TABLE WITH Firstname, lastname, salary, gender and total gender in a new coloumn with the total sum 
+    
+    BETTER THAN GROUP BY STATEMENT BECAUSE:
+select FirstName, LASTNAME, GENDER, SALARY, COUNT(GENDER) 
+From EmployeeDemographics1 DEM
+JOIN employeeSalary SAL
+ON DEM.EmployeeID = SAL.EmployeeID
+GROUP BY FirstName, LASTNAME, GENDER, SALARY                  This script produces an extra coloumn with no name and the genders are not summed 
+    
+
