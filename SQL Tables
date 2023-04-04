@@ -102,10 +102,23 @@ CREATE TABLE #TEMP_EMPLOYEE (EmployeeID int,
 JobTitle Varchar(100),
 Salary int)
 
-  WE CAN INSERT A TABLE INTO A TEMP TABLE AND THEN USE THAT FOR EDITING AND ANALYSING OR WE CAN A SUBSECTION OF A TABLE INTO A TEMP TABLE 
+  WE CAN INSERT A TABLE INTO A TEMP TABLE AND THEN USE THAT FOR EDITING AND ANALYSING OR WE CAN A SUBSECTION OF A TABLE INTO A TEMP TABLE - this makes it much quicker 
+  so we dont need to repeatedly add joins and mutiple table names when scripting
+ 
  Example: 
 INSERT INTO #TEMP_EMPLOYEE  
 SELECT* 
 FROM EmployeeSalary
 
+MAIN EXAMPLE:
 
+insert into #TEMP_EMPLOYEE2  
+SELECT JobTitle, COUNT(JobTitle), Avg(Age), AVG(Salary)
+FROM EmployeeDemographics1 AS DEMO
+JOIN EmployeeSalary AS SAL
+ON DEMO.EmployeeID = SAL.EMPLOYEEID
+Group by JobTitle
+                                         THIS produces a table with jobtitle, count, average salarty and age, merging 2 tables. the results from this can now be the 
+                                         new temp table                               
+Select * 
+From #TEMP_EMPLOYEE2
