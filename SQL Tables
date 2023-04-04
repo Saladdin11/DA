@@ -97,3 +97,15 @@ Right outer JOIN EmployeeSalary
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
  
 
+      CREATING TEMP TABLES 
+CREATE TABLE #TEMP_EMPLOYEE (EmployeeID int, 
+JobTitle Varchar(100),
+Salary int)
+
+  WE CAN INSERT A TABLE INTO A TEMP TABLE AND THEN USE THAT FOR EDITING AND ANALYSING OR WE CAN A SUBSECTION OF A TABLE INTO A TEMP TABLE 
+ Example: 
+INSERT INTO #TEMP_EMPLOYEE  
+SELECT* 
+FROM EmployeeSalary
+
+
