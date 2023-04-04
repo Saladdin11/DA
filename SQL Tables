@@ -50,6 +50,25 @@ Delete From EmployeeDemographics1
 where EmployeeID = 1006
 
  
+UPDATING DATA
+
+SELECT* 
+fROM EmployeeDemographics1
+UPDATE EmployeeDemographics1 
+SET EmployeeID = 1012 WHERE FIRSTNAME = 'HOLLY' 
+
+NEW KEYS = 'UPDATE' AND 'SET' 
+
+EXAMPLE 2 - MULTIPLE CHANGES AT ONCE - use a comma 
+SELECT* 
+fROM EmployeeDemographics1
+UPDATE EmployeeDemographics1 
+SET AGE = 31, Gender = 'FEMALE' WHERE FIRSTNAME = 'HOLLY' 
+
+DELETING DATA - ALways be careful because you cannot undo this
+
+Delete from EmployeeDemographics1
+Where EmployeeID = 1005  
 
 
 
