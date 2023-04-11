@@ -19,3 +19,20 @@ FROM CTE_EMPLOYEE
                             BUT THE CTE QUERY MUST BE IN THE SAME QUERY PAGE
                             
                             
+
+ USING TRIM:
+ 
+SELECT EmployeeID, Trim(EmployeeID) as IDTrim
+FROM EmployeeErrors
+                        this produces a table which has removed any extra gaps in data points across both coloumns - LTRIM AND RTRIM, are used 
+                        to clean up a right or left coloumn 
+                      
+USING REPLACE 
+
+select Lastname, REPLACE(Lastname, '- Fired','' ) As LastNameFixed
+From EmployeeErrors 
+                      THIS HAS REMOVED "- Fired" and replaced it with a blank space - the result table shows the last names and the fixed Lnames
+ 
+ USING SUBSTRING 
+ 
+
