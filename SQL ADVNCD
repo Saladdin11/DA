@@ -35,4 +35,25 @@ From EmployeeErrors
  
  USING SUBSTRING 
  
+select SUBSTRING(Firstname,1,3) as ShrtName
+From EmployeeErrors
+                              THIS CODE - GOES TO FIRSTNAME, STARTS AT THE 1st LETTER, SHOWS US THE FIRST 3 CHARACTERS 
+                              so this produces a table with the ShrtName 
+                              
+ FUZZY MATCHING - when you want to join 2 tables with slightly different names e.g Alexander and Alex - If we try to join based on 
+ firstname it will not work but if we use the substring with 1,4 of it will match them both as Alex. 
+ 
+ EXAMPLE OF FUZZY MATCHING:
+select Substring(err.firstname,1,3), Substring(dem.FirstName,1,3) 
+From EmployeeErrors as err
+join EmployeeDemographics1 as dem
+on Substring(err.firstname,1,3) = Substring(dem.FirstName,1,3) 
+
+GOOD TO MATCH PEOPLE ACROSS DIFFERENT TABLES USING AGE, GENDER, LASTNAME, DOB - if you didnt have employeeID
+
+UPPER AND LOWER -  Takes all characters in text and make them either UPPER CASE OR LOWER CASE
+
+EXAMPLE: 
+select FIRSTNAME,UPPER(FIRSTNAME)
+from EmployeeDemographics1
 
