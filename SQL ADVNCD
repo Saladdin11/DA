@@ -57,3 +57,15 @@ EXAMPLE:
 select FIRSTNAME,UPPER(FIRSTNAME)
 from EmployeeDemographics1
 
+SUBQUERIES:
+
+-- subquery in select 
+select employeeID, Salary, (select AVG(salary) from EmployeeSalary) As AllAvgSalary
+from EmployeeSalary 
+
+-- How to do it with a Partition By
+select employeeID, Salary, AVG(salary) over () As AllAvgSalary
+from EmployeeSalary 
+
+                BOTH THESE CODE PRODUCE THE SAME RESULTS EMPLOYEEID, SALARY AND AVG SALARY
+
