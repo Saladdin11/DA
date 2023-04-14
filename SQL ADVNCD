@@ -31,6 +31,7 @@ USING REPLACE
 
 select Lastname, REPLACE(Lastname, '- Fired','' ) As LastNameFixed
 From EmployeeErrors 
+
                       THIS HAS REMOVED "- Fired" and replaced it with a blank space - the result table shows the last names and the fixed Lnames
  
  USING SUBSTRING 
@@ -68,4 +69,14 @@ select employeeID, Salary, AVG(salary) over () As AllAvgSalary
 from EmployeeSalary 
 
                 BOTH THESE CODE PRODUCE THE SAME RESULTS EMPLOYEEID, SALARY AND AVG SALARY
+
+SUBQUERY IN WHERE STATEMENT 
+
+-- SUBQUERY IN WHERE        - using a subquery to find employee id, salary and job title for everyone above the age fo 30
+
+select employeeID, Salary, JobTitle
+from EmployeeSalary
+WHERE EmployeeID in ( select EmployeeID from EmployeeDemographics1        this is the subquery sectionn 
+where Age >30) 
+
 
