@@ -1,10 +1,10 @@
 Select Distinct (Variable) 
 From Table 
-shows us unique values for a specific coloumn / variable
+##shows us unique values for a specific coloumn / variable
 
 Select Count (coloumn) 
 From Table 
-shows us number of non null values 
+##shows us number of non null values 
 
  select Max (salary)
  From EmployeeSalary
@@ -23,32 +23,32 @@ Where Age > 30
 Select* 
 From EmployeeDemographics
 Where Age >= 30
-to include people aged 30 too
+##to include people aged 30 too
 
 Select* 
 From EmployeeDemographics1
 Where FirstName Like 'a%' 
-slect data where first name starts with A
+##Select data where first name starts with A
 
 Select* 
 From EmployeeDemographics1
 Where FirstName Like '%a%' 
-requests data where thereis an A anywhere in the name 
+##requests data where thereis an A anywhere in the name 
 
 Select* 
 From EmployeeDemographics1
 Where FirstName Like 'S%A%' 
-select data where S at beginning of name and A anywhere in the name
+##select data where S at beginning of name and A anywhere in the name
 
 Select* 
 From EmployeeDemographics1
 Where FirstName is  null
-checks coloum for any null data points 
+##checks coloum for any null data points 
 
 Select* 
 From EmployeeDemographics1
 Where FirstName In ('Jim', 'Michael', 'pam') 
-in can be used as an = statement but quicker to type and easier to use rather than keep tpying out AND 
+##in can be used as an = statement but quicker to type and easier to use rather than keep tpying out AND 
 
 Group by function:
 
@@ -71,24 +71,24 @@ From EmployeeDemographics1
 Where Age > 31 
 Group By Gender
 Order by Gender desc
-this creates a table where gender and number of people in that gender are in a table, decending from highest to lowest 
+## this creates a table where gender and number of people in that gender are in a table, decending from highest to lowest 
 if you want it to be ascending just remove DESC or replace it with ACS
 
 select *
 from EmployeeDemographics1
 Order by Age, gender 
-produces a table where all data is ordered b begining with smallest first
+##produces a table where all data is ordered b begining with smallest first
 
 Can ALSO USE 
 select *
 from EmployeeDemographics1
 Order by 4, 5
-BECAUSE AGE IS COLOUMN 4 AND GENDER IS COLOUMN 5 
+##BECAUSE AGE IS COLOUMN 4 AND GENDER IS COLOUMN 5 
 
 
  
 
-    A TABLE FOR AVERAGE SALARY OF SALESMAN - made from 2 tables - emplyoee demographiscs and employee salary table
+    ##A TABLE FOR AVERAGE SALARY OF SALESMAN - made from 2 tables - emplyoee demographiscs and employee salary table
 SELECT JobTitle, avg(Salary)
 fROM EmployeeDemographics1
 Inner JOIN EmployeeSalary
@@ -106,7 +106,7 @@ JOIN employeeSalary SAL
 ON DEM.EmployeeID = SAL.EmployeeID
         THIS PRODUCES A TABLE WITH Firstname, lastname, salary, gender and total gender in a new coloumn with the total sum 
     
-    BETTER THAN GROUP BY STATEMENT BECAUSE:
+    ##BETTER THAN GROUP BY STATEMENT BECAUSE:
 select FirstName, LASTNAME, GENDER, SALARY, COUNT(GENDER) 
 From EmployeeDemographics1 DEM
 JOIN employeeSalary SAL
