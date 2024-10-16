@@ -97,7 +97,7 @@ Where JobTitle = 'salesman'
 Group by JobTitle
 
 
-        PARTITION BY STATEMENTS: ALLOWS US TO EASILY ADD A NEW COLOUMN INTO A TABLE WHILE KEEPING THE NUMBER OF ROWS THE SAME 
+        ##PARTITION BY STATEMENTS: ALLOWS US TO EASILY ADD A NEW COLOUMN INTO A TABLE WHILE KEEPING THE NUMBER OF ROWS THE SAME 
 EXAMPLE:
 select FirstName, LASTNAME, GENDER, SALARY, 
 COUNT(GENDER) OVER (PARTITION BY GENDER) AS TOTALGENDER
@@ -111,6 +111,6 @@ select FirstName, LASTNAME, GENDER, SALARY, COUNT(GENDER)
 From EmployeeDemographics1 DEM
 JOIN employeeSalary SAL
 ON DEM.EmployeeID = SAL.EmployeeID
-GROUP BY FirstName, LASTNAME, GENDER, SALARY                  This script produces an extra coloumn with no name and the genders are not summed 
+GROUP BY FirstName, LASTNAME, GENDER, SALARY                  ##This script produces an extra coloumn with no name and the genders are not summed 
     
 
