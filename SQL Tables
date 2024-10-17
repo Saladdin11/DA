@@ -102,11 +102,11 @@ CREATE TABLE #TEMP_EMPLOYEE (EmployeeID int,
 JobTitle Varchar(100),
 Salary int)
 
-  WE CAN INSERT A TABLE INTO A TEMP TABLE AND THEN USE THAT FOR EDITING AND ANALYSING OR WE CAN A SUBSECTION OF A TABLE INTO A TEMP TABLE - this makes it much quicker 
-  so we dont need to repeatedly add joins and mutiple table names when scripting
+ ##WE CAN INSERT A TABLE INTO A TEMP TABLE AND THEN USE THAT FOR EDITING AND ANALYSING OR WE CAN Add a SUBSECTION OF A TABLE INTO A TEMP TABLE - this makes it much quicker 
+  so we dont need to repeatedly add joins and multiple table names when scripting
  
- Example: 
-INSERT INTO #TEMP_EMPLOYEE  
+ #Example: 
+INSERT INTO TEMP_EMPLOYEE  
 SELECT* 
 FROM EmployeeSalary
 
