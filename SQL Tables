@@ -38,26 +38,26 @@ Insert Into EmployeeSalary VALUES
 (1008, 'Salesman', 48000),
 (1009, 'Accountant', 42000)
 
-EDITTING / UPDATING TABLES 
+#EDITTING / UPDATING TABLES 
 This code changes holly ID to 1020  and edits her age and gender 
 update EmployeeDemographics1
 set EmployeeID = 1020
 Set Age = 38, Gender = 'Female'
 where firstname = 'Holly' and LastName = 'Flax' 
 
-DELETING ROWS 
+#DELETING ROWS 
 Delete From EmployeeDemographics1 
 where EmployeeID = 1006
 
  
-UPDATING DATA
+#UPDATING DATA
 
 SELECT* 
 fROM EmployeeDemographics1
 UPDATE EmployeeDemographics1 
 SET EmployeeID = 1012 WHERE FIRSTNAME = 'HOLLY' 
 
-NEW KEYS = 'UPDATE' AND 'SET' 
+#NEW KEYS = 'UPDATE' AND 'SET' 
 
 EXAMPLE 2 - MULTIPLE CHANGES AT ONCE - use a comma 
 SELECT* 
@@ -65,32 +65,32 @@ fROM EmployeeDemographics1
 UPDATE EmployeeDemographics1 
 SET AGE = 31, Gender = 'FEMALE' WHERE FIRSTNAME = 'HOLLY' 
 
-DELETING DATA - ALways be careful because you cannot undo this
+#DELETING DATA - ALways be careful because you cannot undo this
 
 Delete from EmployeeDemographics1
 Where EmployeeID = 1005  
 
-                                      MERGING TABLES TOGETHER
+                                     ## MERGING TABLES TOGETHER
 
 INNER JOIN CODE       - shows all data common in both tables 
 SELECT * 
-fROM [SQL tutorial].dbo.EmployeeDemographics1       - select first table 
-INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       - join table 2 
-ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       - enter command to join on common coloumn used in both tables 
+fROM [SQL tutorial].dbo.EmployeeDemographics1       #select first table 
+INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       #join table 2 
+ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       #enter command to join on common coloumn used in both tables 
 
-FULL OUTER JOIN    - shows all data points from both tables including non common data 
+FULL OUTER JOIN    #shows all data points from both tables including non common data 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1
 Full outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-LEFT OUTER JOIN   - Shows all data from the left table and anything else overlapping both tables 
+LEFT OUTER JOIN   #Shows all data from the left table and anything else overlapping both tables 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1
 left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-RIGHT OUTER JOIN        - makes table 2 the main table in the results 
+RIGHT OUTER JOIN        #makes table 2 the main table in the results 
  SELECT * 
 fROM EmployeeDemographics1
 Right outer JOIN EmployeeSalary 
