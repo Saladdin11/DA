@@ -1,4 +1,4 @@
-Calculate Average salary:
+#Calculate Average salary:
 
 SELECT JobTitle, avg(Salary)
 fROM EmployeeDemographics1
@@ -8,7 +8,7 @@ Where JobTitle = 'salesman'
 Group by JobTitle
 
 
-Merging tables with Union       - this produces a merged table where duplicates are removed
+Merging tables with Union       ## this produces a merged table where duplicates are removed
 
 Select *
 From EmployeeDemographics1
@@ -17,7 +17,7 @@ Select *
 From WareHouseEmployeeDemographics
 order by EmployeeID
 
-To merge tables and include duplicates:
+##To merge tables and include duplicates:
 Select *
 From EmployeeDemographics1
 Union All
@@ -26,7 +26,7 @@ From WareHouseEmployeeDemographics
 order by EmployeeID
 
 
-CASE STATEMENTS:    - To specifiy condition and specifiy what you want returned when that condition is met 
+CASE STATEMENTS:    ##To specifiy condition and specifiy what you want returned when that condition is met 
 E.G when age is more than 30 then label old or young. 
 
 Select FirstName, LastName, Age,
@@ -37,7 +37,7 @@ FROM EmployeeDemographics1
 WHERE AGE IS NOT NULL 
 ORDER BY AGE 
 
-Example 2 
+#Example 2 
 
 Select FirstName, LastName, Age,
 Case 
@@ -50,7 +50,7 @@ ORDER BY AGE
 
 WE can keep adding Whens but first 'when' is what SQL sees as most important
 
-ADDING A RAISE TO EVERYONES SALARY - EXAMPLES
+##ADDING A RAISE TO EVERYONES SALARY - EXAMPLES
 
 Select FirstName, LastName, JobTitle, Salary,
 Case
@@ -63,7 +63,7 @@ FROM EmployeeDemographics1
 join EmployeeSalary
 on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-HAVING CLAUSE 
+##HAVING CLAUSE 
 
 Select JobTitle, Count(JobTitle) 
 FROM EmployeeDemographics1
@@ -72,7 +72,7 @@ on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 Group BY JobTitle 
 HAVING COUNT(JOBTITLE) > 1 
 
-	THIS SHOWS US WHICH JOBS HAVE MORE THAN ONE EMPLOYEE - IT TELLS US HOW MANY EMPLOYEES ARE FOR EACH JOB TITLE 
+	##THIS SHOWS US WHICH JOBS HAVE MORE THAN ONE EMPLOYEE - IT TELLS US HOW MANY EMPLOYEES ARE FOR EACH JOB TITLE 
 
 
 
@@ -81,17 +81,17 @@ FROM EmployeeDemographics1
 Join EmployeeSalary 
 on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 Group BY JobTitle
-HAVING AVG(SALARY) > 40000        MUST COME AFTER GROUP BY STATEMENT 
+HAVING AVG(SALARY) > 40000        ##MUST COME AFTER GROUP BY STATEMENT 
 ORDER BY AVG(SALARY)   
 
-	THIS SHOWS US WHOS AVERAGE SALARY IS HIGHER THAN 40K IN ORDER OF OF LOWEST SALARY FIRST
+	##THIS SHOWS US WHOS AVERAGE SALARY IS HIGHER THAN 40K IN ORDER OF OF LOWEST SALARY FIRST
 	
 	
-	ALIASING - USED TO CHANGE COLOUMN OR TABLE NAME TEMPORARILY TO MAKE SCRIPT MORE READABLE 
+	##ALIASING - USED TO CHANGE COLOUMN OR TABLE NAME TEMPORARILY TO MAKE SCRIPT MORE READABLE 
 EXAMPLE:
 
 SELECT FIRSTNAME AS FNAME
-FROM EmployeeDemographics1 			THIS RESULTS IN THE COLOUMN BEING NAMES FNAME 
+FROM EmployeeDemographics1 			##THIS RESULTS IN THE COLOUMN BEING NAMES FNAME 
 
 		THE SAME RESULT CAN BE ACHIEVED WITHOUT THE AS SO:
 		SELECT FIRSTNAME FNAME
@@ -102,7 +102,7 @@ TO COMBINE FIRST NAME AND LAST NAME COLOUMNS INTO ONE TEMPORARILY:
 
 SELECT FIRSTNAME + ' ' + LASTNAME AS FULLNAME
 FROM EmployeeDemographics1
-				the ' ' is added to add a space between the first name and last name of each person in the coloumn 
+				##the ' ' is added to add a space between the first name and last name of each person in the coloumn 
 
 		TO CALCULATE AVERAGE AGE AND NAME THE RESULT TABLE WITH 'AVGAGE'
 SELECT avg(age) as avgage
@@ -113,10 +113,10 @@ FROM EmployeeDemographics1
 SELECT DEMO.EMPLOYEEID, SAL.Salary
 FROM EmployeeDemographics1 AS DEMO
 JOIN EmployeeSalary AS SAL
-ON DEMO.EmployeeID = SAL.EMPLOYEEID		Here we are looking at employee ID and Salary in a joined tbale but using alias names (Sal and Demo) 
+ON DEMO.EmployeeID = SAL.EMPLOYEEID		##Here we are looking at employee ID and Salary in a joined table but using alias names (Sal and Demo) 
 						
 
-EXAMPLE 2 - with joins and 3 tables 
+##EXAMPLE 2 - with joins and 3 tables 
 
 SELECT DEMO.EMPLOYEEID, Demo.firstname, SAL.Salary, ware.age
 FROM EmployeeDemographics1 AS DEMO
