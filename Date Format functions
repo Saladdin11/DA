@@ -40,4 +40,7 @@ FROM customers;
 
 SELECT birth_date, DATE_FORMAT(birth_date,'%M %d %'Y' 
 FROM customers;
+## this is customisable can also add - 
+# capital M gets us the name of the month
+
 
