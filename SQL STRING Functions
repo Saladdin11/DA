@@ -42,4 +42,28 @@ FROM customers;
 SELECT REPLACE(phone, '-', '')      #replace - with ' ' a space / nothing
 FROM customers 
 
-        
+#LOCATE has 2 arguments - specifiy what were searching fro and where 
+SELECT LOCATE('x'. 'Alexander) 
+Result = 4  for 4th character 
+
+Select first_name, LOCATE('Mic',first_name) 
+From Customers;
+
+#Concat - combines strings/coloumns or values together 
+
+SELECT CONCAT('Salah',' Saadeh')
+##result = salah saadeh
+
+#Real case example 
+
+SELECT phone, 
+SUBSTRING(phone,1,3),
+SUBSTRING(phone,5,3),
+SUBSTRING(phone,9,4).
+CONCAT(SUBSTRING(phone,1,3),SUBSTRING(phone,5,3),SUBSTRING(phone,9,4))
+From Customers;
+
+## This would standardise all phone numbers, removing any dashes or extra characters 
+
+
+
