@@ -1,0 +1,43 @@
+#Date and Date Format functions 
+
+##CURDATE - shows current date
+##CURTIME - shows current time 
+
+SELECT Now() # can be used at end of a report so when its run it keeps track of time n date it was run 
+
+SELECT YEAR(NOW()) ;
+SELECT MONTH(NOW()) ;
+#
+
+SELECT * 
+WHERE YEAR(birth_date) = YEAR(NOW()) 
+## this looks for a birthdate which is the same year as now - we can use this in several ways
+
+SELECT * 
+FROM customer_orders
+WHERE YEAR(order_date) = Year(NOW()) - 1 
+  ## This is now aksing to get order info from last year 
+
+
+## Example 2 
+SELECT * 
+FROM customer_orders
+WHERE MONTH(order_date) = MONTH(NOW()) - 1 
+
+SELECT DAYNAME(NOW()); 
+## GIVES US THE CURRENT DAY 
+
+SELECT order_date, DAYNAME(order_date) 
+FROM customer_orders
+## shows us which days orders were made on, useful for looking at consumer behavioural patterns
+## can also be done with MONTHNAME 
+
+#DATEFORMAT - takes existing date formats into a newone 
+
+SELECT birth_date,
+FROM customers;
+#we can change date formats using:
+
+SELECT birth_date, DATE_FORMAT(birth_date,'%M %d %'Y' 
+FROM customers;
+
