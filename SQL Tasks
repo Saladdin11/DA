@@ -8,7 +8,7 @@ Where JobTitle = 'salesman'
 Group by JobTitle
 
 
-Merging tables with Union       ## this produces a merged table where duplicates are removed
+##Merging tables with Union       ## this produces a merged table where duplicates are removed
 
 Select *
 From EmployeeDemographics1
