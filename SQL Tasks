@@ -63,7 +63,10 @@ FROM EmployeeDemographics1
 join EmployeeSalary
 on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-##HAVING CLAUSE 
+##HAVING CLAUSE  - ALLOWS US TO FILTER BASED ON AN AGGREGATED COLOUMN - WHERE clause allows to filter just regular coloumns 
+#WHERE and HAVING are both used to filter results, but they are used in different scenarios:
+#The WHERE clause is used to filter rows before any grouping or aggregation takes place. It works on the individual rows of the table.
+#The HAVING clause is used to filter results after grouping has taken place. It works on the results of the grouping.
 
 Select JobTitle, Count(JobTitle) 
 FROM EmployeeDemographics1
@@ -74,22 +77,18 @@ HAVING COUNT(JOBTITLE) > 1
 
 	##THIS SHOWS US WHICH JOBS HAVE MORE THAN ONE EMPLOYEE - IT TELLS US HOW MANY EMPLOYEES ARE FOR EACH JOB TITLE 
 
-
-
 Select JobTitle, avg(Salary) 
 FROM EmployeeDemographics1
 Join EmployeeSalary 
 on EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 Group BY JobTitle
-HAVING AVG(SALARY) > 40000        ##MUST COME AFTER GROUP BY STATEMENT 
+HAVING AVG(SALARY) > 40000        ##MUST COME AFTER GROUP BY STATEMENT because of the order SQL commands are done 
 ORDER BY AVG(SALARY)   
+##THIS SHOWS US WHOS AVERAGE SALARY IS HIGHER THAN 40K IN ORDER OF OF LOWEST SALARY FIRST
+	
 
-	##THIS SHOWS US WHOS AVERAGE SALARY IS HIGHER THAN 40K IN ORDER OF OF LOWEST SALARY FIRST
-	
-	
 	##ALIASING - USED TO CHANGE COLOUMN OR TABLE NAME TEMPORARILY TO MAKE SCRIPT MORE READABLE 
 EXAMPLE:
-
 SELECT FIRSTNAME AS FNAME
 FROM EmployeeDemographics1 			##THIS RESULTS IN THE COLOUMN BEING NAMES FNAME 
 
@@ -97,18 +96,17 @@ FROM EmployeeDemographics1 			##THIS RESULTS IN THE COLOUMN BEING NAMES FNAME
 		SELECT FIRSTNAME FNAME
 		FROM EmployeeDemographics1
 		
-		
-TO COMBINE FIRST NAME AND LAST NAME COLOUMNS INTO ONE TEMPORARILY:
+##TO COMBINE FIRST NAME AND LAST NAME COLOUMNS INTO ONE TEMPORARILY:
 
 SELECT FIRSTNAME + ' ' + LASTNAME AS FULLNAME
 FROM EmployeeDemographics1
 				##the ' ' is added to add a space between the first name and last name of each person in the coloumn 
 
-		TO CALCULATE AVERAGE AGE AND NAME THE RESULT TABLE WITH 'AVGAGE'
+		##TO CALCULATE AVERAGE AGE AND NAME THE RESULT TABLE WITH 'AVGAGE'
 SELECT avg(age) as avgage
 FROM EmployeeDemographics1
 
-	AN EXAMPLE OF USING ALIASING FOR TABLE NAMES AND COLOUMN NAMES	
+	##AN EXAMPLE OF USING ALIASING FOR TABLE NAMES AND COLOUMN NAMES	
 
 SELECT DEMO.EMPLOYEEID, SAL.Salary
 FROM EmployeeDemographics1 AS DEMO
