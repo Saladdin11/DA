@@ -59,7 +59,7 @@ SET EmployeeID = 1012 WHERE FIRSTNAME = 'HOLLY'
 
 #NEW KEYS = 'UPDATE' AND 'SET' 
 
-EXAMPLE 2 - MULTIPLE CHANGES AT ONCE - use a comma 
+#EXAMPLE 2 - MULTIPLE CHANGES AT ONCE - use a comma 
 SELECT* 
 fROM EmployeeDemographics1
 UPDATE EmployeeDemographics1 
@@ -70,34 +70,34 @@ SET AGE = 31, Gender = 'FEMALE' WHERE FIRSTNAME = 'HOLLY'
 Delete from EmployeeDemographics1
 Where EmployeeID = 1005  
 
-                                     ## MERGING TABLES TOGETHER
+                                     ## JOINS / MERGING TABLES TOGETHER
 
-INNER JOIN CODE       - shows all data common in both tables 
+##INNER JOIN CODE       - #shows all data common in both tables 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1       #select first table 
 INNER JOIN  [SQL tutorial].dbo.EmployeeSalary       #join table 2 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID       #enter command to join on common coloumn used in both tables 
 
-FULL OUTER JOIN    #shows all data points from both tables including non common data 
+##FULL OUTER JOIN    #shows all data points from both tables including non common data 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1
 Full outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-LEFT OUTER JOIN   #Shows all data from the left table and anything else overlapping both tables 
+##LEFT OUTER JOIN   #Shows all data from the left table and anything else overlapping both tables 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1
 left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-RIGHT OUTER JOIN        #makes table 2 the main table in the results 
- SELECT * 
-fROM EmployeeDemographics1
+##RIGHT OUTER JOIN        #makes table 2 the main table in the results 
+SELECT * 
+FROM EmployeeDemographics1
 Right outer JOIN EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
  
 
-      CREATING TEMP TABLES 
+             ##CREATING TEMP TABLES 
 CREATE TABLE #TEMP_EMPLOYEE (EmployeeID int, 
 JobTitle Varchar(100),
 Salary int)
@@ -110,22 +110,21 @@ INSERT INTO TEMP_EMPLOYEE
 SELECT* 
 FROM EmployeeSalary
 
-MAIN EXAMPLE:
-
-insert into #TEMP_EMPLOYEE2  
+#MAIN EXAMPLE:
+Insert into #TEMP_EMPLOYEE2  
 SELECT JobTitle, COUNT(JobTitle), Avg(Age), AVG(Salary)
 FROM EmployeeDemographics1 AS DEMO
 JOIN EmployeeSalary AS SAL
 ON DEMO.EmployeeID = SAL.EMPLOYEEID
 Group by JobTitle
-                                         THIS produces a table with jobtitle, count, average salarty and age, merging 2 tables. the results from this can now be the 
+                                         ##THIS produces a table with jobtitle, count, average salarty and age, merging 2 tables. The results/output from this can now be the 
                                          new temp table                               
 Select * 
 From #TEMP_EMPLOYEE2
 
     ALL TOGETHER: -
     
- DROP TABLE IF EXISTS #TEMP_Employee2         adding this line in allows us to keep executing script, it deletes Temp-employee2 and then re-creates it
+DROP TABLE IF EXISTS #TEMP_Employee2         ##adding this line in allows us to keep executing script, it deletes Temp-employee2 and then re-creates it
 CREATE TABLE #TEMP_EMPLOYEE2 (
 JobTitle Varchar(50), EmployeesPerJob int,
 AvgAge int,
