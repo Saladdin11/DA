@@ -50,7 +50,7 @@ From EmployeeDemographics1
 Where FirstName In ('Jim', 'Michael', 'pam') 
 ##in can be used as an = statement but quicker to type and easier to use rather than keep tpying out AND 
 
-Group by function:
+ ##Group by function:
 
 Select Gender
 From EmployeeDemographics1
@@ -59,34 +59,32 @@ Group by Gender
 Select Gender, COUNT (Gender)
 From EmployeeDemographics1
 Group by Gender
-this shows the 2 genders and lists the number of people in each group 
+  ##this shows the 2 genders and lists the number of people in each group 
 
 Select Gender, Age, COUNT (Gender)
 From EmployeeDemographics1
 Group by Gender, Age
  
  
- Select gender, Count (Gender) as CountGender 
+Select gender, Count (Gender) as CountGender 
 From EmployeeDemographics1
 Where Age > 31 
 Group By Gender
 Order by Gender desc
-## this creates a table where gender and number of people in that gender are in a table, decending from highest to lowest 
+   ## this creates a table where gender and number of people in that gender are in a table, decending from highest to lowest 
 if you want it to be ascending just remove DESC or replace it with ACS
 
 select *
 from EmployeeDemographics1
 Order by Age, gender 
-##produces a table where all data is ordered b begining with smallest first
+  ##produces a table where all data is ordered begining with smallest first
 
-Can ALSO USE 
+  ##Can ALSO USE 
 select *
 from EmployeeDemographics1
 Order by 4, 5
 ##BECAUSE AGE IS COLOUMN 4 AND GENDER IS COLOUMN 5 
 
-
- 
 
     ##A TABLE FOR AVERAGE SALARY OF SALESMAN - made from 2 tables - emplyoee demographiscs and employee salary table
 SELECT JobTitle, avg(Salary)
@@ -113,4 +111,6 @@ JOIN employeeSalary SAL
 ON DEM.EmployeeID = SAL.EmployeeID
 GROUP BY FirstName, LASTNAME, GENDER, SALARY                  ##This script produces an extra coloumn with no name and the genders are not summed 
     
+##HAVING CLAUSE ALLOWS US TO FILTER BASED ON AN AGGREGATED COLOUMN - WHERE clause allows to filter just regular coloumns 
+
 
