@@ -102,15 +102,14 @@ COUNT(GENDER) OVER (PARTITION BY GENDER) AS TOTALGENDER
 From EmployeeDemographics1 DEM
 JOIN employeeSalary SAL
 ON DEM.EmployeeID = SAL.EmployeeID
-        THIS PRODUCES A TABLE WITH Firstname, lastname, salary, gender and total gender in a new coloumn with the total sum 
+        ##THIS PRODUCES A TABLE WITH Firstname, lastname, salary, gender and total gender in a new coloumn with the total sum 
     
-    ##BETTER THAN GROUP BY STATEMENT BECAUSE:
+    
 select FirstName, LASTNAME, GENDER, SALARY, COUNT(GENDER) 
 From EmployeeDemographics1 DEM
 JOIN employeeSalary SAL
 ON DEM.EmployeeID = SAL.EmployeeID
 GROUP BY FirstName, LASTNAME, GENDER, SALARY                  ##This script produces an extra coloumn with no name and the genders are not summed 
     
-##HAVING CLAUSE ALLOWS US TO FILTER BASED ON AN AGGREGATED COLOUMN - WHERE clause allows to filter just regular coloumns 
 
 
