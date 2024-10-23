@@ -87,13 +87,13 @@ ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 ##LEFT OUTER JOIN   #Shows all data from the left table and anything else overlapping both tables 
 SELECT * 
 fROM [SQL tutorial].dbo.EmployeeDemographics1
-left outer JOIN  [SQL tutorial].dbo.EmployeeSalary 
+LEFTO OUTER JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
 ##RIGHT OUTER JOIN        #makes table 2 the main table in the results 
 SELECT * 
 FROM EmployeeDemographics1
-Right outer JOIN EmployeeSalary 
+RIGHT OUTER JOIN EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
               ##JOINS on multiple conditions 
