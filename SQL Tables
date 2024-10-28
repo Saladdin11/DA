@@ -90,18 +90,19 @@ fROM [SQL tutorial].dbo.EmployeeDemographics1
 LEFTO OUTER JOIN  [SQL tutorial].dbo.EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
 
-##RIGHT OUTER JOIN        #makes table 2 the main table in the results 
+##RIGHT OUTER JOIN        ##makes table 2 the main table in the results 
 SELECT * 
 FROM EmployeeDemographics1
 RIGHT OUTER JOIN EmployeeSalary 
 ON EmployeeDemographics1.EmployeeID = EmployeeSalary.EmployeeID
+
 
               ##JOINS on multiple conditions 
 SELECT*
 FROM customer_orders AS co
 JOIN customer_orders_review AS cor
  ON co.order_id = cor.order_id         #useful for when we join on a coloumn but some data seems incorrect from the 2nd table so we can join
- AND co.customer_id = cor.customer_id  on another coloumn so in this example we join on customer id +date as well as order id as some customer ids/dates were not matching in our output
+ AND co.customer_id = cor.customer_id  on another coloumn so in this example we join on customer id + date as well as order id as some customer ids/dates were not matching in our output
  AND co.customer_id = cor.customer_id   
                                         # Can use AND statements to join on multiple coloumns 
                                         # this will make the 2nd table correct itself with corresponding dates and customer ids from the first table 
