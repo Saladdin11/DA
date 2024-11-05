@@ -1,0 +1,26 @@
+# a Subquery is a SELECT statement nested within another query 
+# A Subquery returns an output that is used by the 'outer query'
+
+##Example:
+SELECT order_id, order_date, Customer_id
+FROM Sales.orders
+WHERE Customer_id IN ( Select Customer_id
+              FROM sales.customers WHERE City = 'Manchester')   ## () the subquery here generates a small table of 
+                                                                    custmomer IDs which are = to manchester
+#Could use a join but this is easier to use and quicker - joining large tables can take alot more processing 
+
+SELECT *
+FROM customers
+WHERE customer_id IN
+(SELECT customer_id          #Sunqueries can only have 1 coloumn and work faster then joins 
+FROM customer_orders
+Where tip > 1 ) 
+
+SELECT customer_name, customer_id
+FROM customers
+WHERE customer_id 
+IN (SELECT customer_id               # Can also use NOT IN to look for values that are in one table but missing from another
+       FROM orders 
+       WHERE order_amount > 1000);
+
+
