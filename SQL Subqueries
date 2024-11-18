@@ -55,5 +55,25 @@ WHERE (quantity * unit_price) > ANY (SELECT (quantity * unit_price) as total_ord
         WHERE shipper_id = 1)
 # With ANY it checks whether quantitiy*unit price is bigger than any of the orders from shipperid=1 so the output is all 
 
+   #EXISTS OPERATOR  - checks if a value exists within a subquery and if it evlautes to true, it will give an output 
+#similar to IN operator and can be used instead of it in very large databases for more effeciecny 
 
+#exists works to check to see if there are values in your subquery / and used for perfomance because it doesnt evaluate whole subquery
+only until it reaches a TRUE 
 
+#IN example
+SELECT* 
+FROM customers
+WHERE customer_ID IN 
+      (SELECT customer_id
+      FROM customer_orders) 
+#EXISTS EXAMPLE for same output 
+
+SELECT *
+FROM customers c 
+WHERE EXISTS 
+     (SELECT customer_id
+      FROM customer_orders
+      WHERE customer_id = c.customer_id) 
+
+# RARELY ever used 
