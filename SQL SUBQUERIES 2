@@ -1,0 +1,22 @@
+# Using Subqueries in SELECT and FROM statements 
+
+SELECT product_id, quanity, AVG(quantity) 
+FROM ordered_items
+#this doesnt work as AVG(quantity) wont be read by sql but instead we can use a subquery using SELECT
+
+SELECT product_id, quantity, 
+(SELECT AVG(quantity) FROM bakery.ordered_items) as avg_quantity
+FROM bakery.ordered_items 
+
+#We can use a subquery in the select statement to look at how much each order is in terms of % of all orders
+
+SELECT product_id, quantity, 
+quantity / (SELECT SUM(quantity) FROM bakery.ordered_items) * 100 as percent_of_quantity  #quantity divided by subquery (sum of quantity)
+FROM bakery.ordered_items 
+
+#we can also use subqueries in FROM statements to build our own tables but we must give it an alias 
+
+SELECT *
+FROM (SELECT product_id, quantity, 
+(SELECT AVG(quantity) FROM bakery.ordered_items) as avg_quantity
+FROM bakery.ordered_items) AS avg_quant
