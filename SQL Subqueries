@@ -24,3 +24,36 @@ IN (SELECT customer_id               # Can also use NOT IN to look for values th
        WHERE order_amount > 1000);
 
 
+##Example - we want to find largest order from shipper id = 1 so,
+
+SELECT MAX(quantity * unit_price) as total_order_price
+FROM ordered_items
+WHERE shipper_id = 1
+
+#This will  be our subquery - we now want to find orders that are larger than our biggest order from shipperid 1 
+
+SELECT shipper_id, order_id, Quantity, unit_price, (quantity * unit_price) as total_order_price
+FROM bakery.ordered_items
+WHERE (quantity * unit_price) > (SELECT MAX(quantity * unit_price) as total_order_price
+        FROM bakery.ordered_items
+        WHERE shipper_id = 1)
+
+#now we can use ALL instead of max which will compare (quantity * unit_price) for all values of shipper id =1 
+
+SELECT shipper_id, order_id, Quantity, unit_price, (quantity * unit_price) as total_order_price
+FROM bakery.ordered_items
+WHERE (quantity * unit_price) > ALL (SELECT (quantity * unit_price) as total_order_price
+        FROM bakery.ordered_items
+        WHERE shipper_id = 1)
+
+#both queries produce the same output 
+
+SELECT shipper_id, order_id, Quantity, unit_price, (quantity * unit_price) as total_order_price
+FROM bakery.ordered_items
+WHERE (quantity * unit_price) > ANY (SELECT (quantity * unit_price) as total_order_price
+        FROM bakery.ordered_items
+        WHERE shipper_id = 1)
+# With ANY it checks whether quantitiy*unit price is bigger than any of the orders from shipperid=1 so the output is all 
+
+
+
