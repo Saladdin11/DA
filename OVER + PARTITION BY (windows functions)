@@ -1,0 +1,46 @@
+#OVER Clause:
+##The OVER clause defines a window or set of rows within the query result set. A window function then computes a value for each row in the window. You can think of it as a moving or sliding window for each row.
+
+#PARTITION BY:
+##The PARTITION BY clause divides the result set produced by the FROM clause into partitions to which the window function is applied. In other words, it creates a 'window' for each set of rows sharing the same values of the PARTITION BY clause.
+
+# Understanding use case and power of combining OVER clause with PARTITION BY
+
+#we want to show customer id, name and how much they are spending and the MAX they have spent
+#lets try it with a GROUP BY 
+
+SELECT c.customer_id, first_name, order_total
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+#we want to show order total side by side with max total to compare current with max order in past
+
+SELECT c.customer_id, first_name, order_total, MAX(order_total) 
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+GROUP BY c.customer_id, first_name, order_total
+
+# However in the output each order is grouped with itself so doesnt show the previous MAX order with it this is a limitation of groupby 
+#To solve this problem we use OVER (a windows function)
+
+#Solution:
+SELECT c.customer_id, first_name, order_total, MAX(order_total) OVER () As Max_order_total
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+# 'Over () As Max_order_total' is the same as 'SELECT MAX(order) FROM Customer_orders As Max_order_total'
+
+# PARTITION BY allows us to divide the query results into partitions
+
+SELECT c.customer_id, first_name, order_total, MAX(order_total) OVER (PARTITION BY customer_id) As Max_order_total
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+# 'MAX(order_total) Over (PARTITON BY customer_id ) As Max_order_total' this breaks up the query by customer_id 
+#so that that each row is compared to the max for that customer ID 
+#Now we can compare customers orders with their past max order 
+
