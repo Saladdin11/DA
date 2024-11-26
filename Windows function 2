@@ -1,0 +1,65 @@
+ROW_NUMBER() is a window function in SQL that assigns a unique row number to each row within the partition of a result set. The first row selected has a row number of 1, the second has 2, and so on.
+
+SELECT c.customer_id,
+first_name,
+order_total,
+MAX(order_total) OVER (PARTITION BY customer_id) As Max_order_total
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+#Script from prev windows function lesson ^ 
+
+
+#instead of 'MAX(order_total) OVER (PARTITION BY customer_id) As Max_order_total' we rplace with ROW _NUMBER() OVER () 
+
+SELECT c.customer_id,
+first_name,
+order_total,
+ROW_NUMBER() OVER () 
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+# we can add more info to this to make it more specific such as ordering or PARTIONING by customer_ID 
+
+SELECT c.customer_id,
+first_name,
+order_total,
+ROW_NUMBER() OVER (PARTITION BY Customer_id) 
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+#Result = this now assings numbers to our customers orders for each specific customer but in a random order, we can also order them by order amount
+
+SELECT c.customer_id,
+first_name,
+order_total,
+ROW_NUMBER() OVER (PARTITION BY Customer_id ORDER BY order_total ASC) 
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+
+# Now for each customer  his orders are listed in order of size 
+
+SELECT c.customer_id,
+first_name,
+order_total,
+ROW_NUMBER() OVER (PARTITION BY Customer_id ORDER BY order_total DESC) AS Row_num
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id
+WHERE row_num < 3 
+# IF we try to see the top 2 biggest orders from all of our customers we can use this script however it doesnt work because SQL doesnt know coloumn 'Row_num'
+#To get past this we can use this script as a table and put it in a subquery as below 
+
+SELECT * 
+FROM (SELECT c.customer_id,
+first_name,
+order_total,
+ROW_NUMBER() OVER (PARTITION BY Customer_id ORDER BY order_total DESC) AS Row_num
+FROM  bakery.Customers c
+JOIN Bakery.customer_orders co
+ON c.customer_id = co.customer_id) AS Row_Table
+WHERE row_num < 3 ;
