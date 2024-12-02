@@ -41,6 +41,6 @@ JOIN Bakery.customer_orders co
 ON c.customer_id = co.customer_id
 
 # 'MAX(order_total) Over (PARTITON BY customer_id ) As Max_order_total' this breaks up the query by customer_id 
-#so that that each row is compared to the max for that customer ID 
-#Now we can compare customers orders with their past max order 
+# so that that each row is compared to the max for that customer ID 
+# Now we can compare customers orders with their past max order 
 
