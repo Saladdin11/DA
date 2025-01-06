@@ -1,1 +1,64 @@
-reg
+#Regular expressions (REGEX) are like using the like statement but much more advanced and you can spexify the patteern you are looking for, in a more specific way 
+## They are a sequence of characters used to search and locate specific sequences of characters that
+#match a provided pattern 
+
+#Example 1:
+SELECT phone
+FROM z_regular_expression 
+WHERE phone REGEXP '[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}' ; 
+ # this is asking for a pattern that we specified in the quotes, 3 numeriv calues with a - x2 then 
+#4 numeric values with a -
+
+Example2 'REGEXP':
+SELECT *
+FROM customers
+WHERE first_name REGEXP 'k.{3}n' ; 
+  # here we are looking for something that starts with k and has 3 letters and ends with an n
+
+## REGEXP (or RLIKE): This is a pattern match operator, which is used to match a column value against a pattern using a regular expression. 
+##If the value matches the pattern, the REGEXP operator returns 1, otherwise it returns 0
+
+
+#REGEXP_LIKE(string, pattern, [match_type]): This function is similar to REGEXP, but it allows you to specify a match type. The match type can include 'c' for case-sensitive matching,
+##'i' for case-insensitive matching, 'm' for multi-line mode, 'n' for Unix newline mode, and 'u' for Unicode mode.
+
+#Example 3 'REGEXP_LIKE':
+SELECT column_name 
+FROM table_name 
+WHERE REGEXP_LIKE(column_name, 'pattern', 'i');
+
+#For Example:
+SELECT first_name, REGEXP_LIKE(first_name, 'a')
+FROM bakery.customers 
+#This produces a table of 0/1s for yes or no if an 'a' is present in the name 
+
+##REGEXP_INSTR(string, pattern, [position, occurrence, match_type, return_end]): This function returns the starting index of the first occurrence of the pattern in the string. If the pattern is not found, it returns 0/NULL
+
+#Example 4 'REGEXP_INSTR:
+SELECT first_name, REGEXP_INSTR(first_name, 'a')
+FROM bakery.customers 
+    #This results in a table whcih shows a number which a appears as in the first name e.g 'Charles' OUTPUT = '3' 
+
+#Example 5 'REGEX_SUBSTR':
+
+SELECT REGEXP_SUBSTR(column_name, 'pattern') 
+FROM table_name;
+REGEXP_REPLACE(string, pattern, replacement, [position, occurrence, match_type]): This function replaces occurrences of the pattern in the string with a replacement string and returns the resulting string.
+
+E#xample:
+SELECT first_name, REGEXP_SUBSTR(first_name, 'char')
+FROM bakery.customers 
+#RESULT - Looks for 'Char' in all results and if it finds it its presents it in the table 
+
+#Example 6 'REGEXP_REPLACE':
+
+SELECT REGEXP_REPLACE(column_name, 'pattern', 'replacement') 
+FROM table_name;
+
+so like:
+SELECT first_name, REGECP_REPLACE(first_name, 'a','b')
+FROM bakery.customers ;
+#Result - swithes all letters of a with b 
+
+##Regular expressions are a powerful tool for pattern matching and manipulation of string data, but they can be complex and may require some practice to use effectively.
+
