@@ -1,1 +1,63 @@
+Example use cases:
+
+EXAMPLE1:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP '[a-c]'
+; 
+ # By using brackets [] we can look for a range of characters 
+
+#EXAMPLE 2:
+ SELECT * 	
+ FROM bakery.customers
+ WHERE phone REGEXP '.'
+ #If we search for '.' it comes up with any values but if a row is empty or null it wont come up in the results 
+
+#EXAMPLE 3:
+ SELECT * 	
+ FROM bakery.customers
+ WHERE phone REGEXP '6.'
+  #Here we are looking for any number with a 6 and a value after it 
+
+#EXAMPLE 4:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP 'k...n'
+    # This reutrns 'kevin' shows us how we can look for very specific patterns in our dataset 
+
+#EXAMPLE 5:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP '^k'
+  # '^' = this looks for any name that has a K AT THE BEGINNING of the pattern
+WHERE first_name REGEXP 'k$' - The $ looks for ending Values - result will end in k 
+
+#EXANPLE 6:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP '^k'
+
+#EXAMPLE 7:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP 'Obi.*'
+'*' = means 0 or more characters after 
+'+' means we have at least 1 character after 
+'?' 0 or 1 more characters after only 
+
+
+#EXAMPLE 8:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP 'K.{3}n';
+#{} squiggly brackets define how many characters should come before 'n' 
+# we can combine all these characters to be specific in what we look for 
+
+#EXAMPLE 9:
+SELECT *
+FROM bakery.customers
+WHERE first_name REGEXP 'kev|fro '
+
+# '|' = either or - useful whewn searching for multiple values  
+
 
