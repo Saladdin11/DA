@@ -1,1 +1,29 @@
 
+SELECT *
+FROM z_regular_expression
+WHERE email REGEXP '@gmail' ; 
+# This gets us all rows with a gmail account
+## we might want to extract some information from this table - we can use REGEXP SUBSTRING 
+
+#FOR example if we wanted any email account we could specify for '@'
+
+SELECT email, REGEXP_SUBSTR(email, '@.+')
+FROM z_regular_expression;  
+   # here we look for an '@' and the'.' says there must be a character after and the '+' says to go to the end
+
+SELECT email, REGEXP_SUBSTR(email, '@[a-z]+')
+FROM z_regular_expression;  
+    # This results in the email and just the @emailtype
+
+
+#phone number example 
+
+SELECT phone
+FROM z_regular_expression
+WHERE phone REGEXP '[0-9]{3}.[0-9]{3}.[0-9]{4}'
+      # here we are specifiying a range from 0-9 of 3 numbers with a space x2 then with 4 numbers
+
+SELECT *
+FROM z_regular_expression
+WHERE phrase REGEXP'.+SQL.+' 
+  #the use of . & + here allows us to specify that there are characters before and after and to get all of them in our output
