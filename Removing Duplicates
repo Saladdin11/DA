@@ -1,0 +1,34 @@
+# Changing coloumn names 
+#ALTER TABLE 'tablename' RENAME COLUMN 'Coloumns name' TO 'New name' 
+ALTER TABLE bakery.customer_sweepstakes RENAME COLUMN `ï»¿sweepstake_id` TO `Sweepstake_id` ;
+
+#1 Finding Duplicates
+#Example duplicate customer records based on customer ID
+
+SELECT customer_id, COUNT(Customer_id)
+FROM bakery.customer_sweepstakes
+GROUP BY customer_id
+HAVING COUNT(customer_id) > 1 ;
+
+# Another way to do identify duplicates is to use window functions:
+
+SELECT Customer_id, 
+ROW_NUMBER() OVER(PARTITION BY Customer_id) AS Row_num
+FROM bakery.customer_sweepstakes
+  #Results in showing all ids with 2 records - then we can use this as our subquery 
+#2
+SELECT *
+FROM (SELECT Customer_id, 
+ROW_NUMBER() OVER(PARTITION BY Customer_id) AS Row_num
+FROM bakery.customer_sweepstakes) AS table_row
+WHERE Row_num > 1 ; 
+
+#DELETING the duplicate Records we have just identified 
+
+DELETE FROM bakery.customer_sweepstakes
+WHERE sweepstake_id IN (
+	SELECT sweepstake_id              #THIS TIME WE ONLY NEED TO SELECT THE SWEEPSTAKE ID 
+	FROM (SELECT sweepstake_id, 
+		ROW_NUMBER() OVER(PARTITION BY Customer_id) AS Row_num
+		FROM bakery.customer_sweepstakes) AS table_row
+		WHERE Row_num > 1 );
