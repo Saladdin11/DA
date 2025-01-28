@@ -1,0 +1,65 @@
+#We may want to break out address coloumns into mul;tiple coloumns so we can use area/city in our analysis 
+
+#We can use SUBSTRING_INDEX to do this 
+SELECT address, SUBSTRING_INDEX(address,',',1)   #the , is the delimeter, seperating the different parts of the address
+FROM bakery.customer_sweepstakes;                 #1 is specifying the first , 
+
+SELECT address, SUBSTRING_INDEX(address,',',-1)  #Can also use -1 to get the last part of the address, usually the state
+FROM bakery.customer_sweepstakes;
+
+#To break out the middle part of the address we can use a SUBSTRING_INDEX of a SUBSTRING_INDEX 
+#This gets us our middle section of the address, usually city 
+
+SELECT address, SUBSTRING_INDEX(SUBSTRING_INDEX(address,',',2),',',-1) 
+FROM bakery.customer_sweepstakes;
+
+#No we can combine all of these and add titles to the coloumns as Below: 
+
+SELECT address, SUBSTRING_INDEX(address,',',1) As Street,
+SUBSTRING_INDEX(SUBSTRING_INDEX(address,',',2),',',-1) As City ,
+SUBSTRING_INDEX(address,',',-1) AS State
+FROM bakery.customer_sweepstakes;
+
+#Now we need to Alter our table to add the new coloumns we want (Street Address, City, State)
+
+ALTER TABLE bakery.customer_sweepstakes
+ADD COLUMN Street VARCHAR(50) AFTER address;   # We can specift where we want the new coloumn (after the address coloumn)
+
+#Add the other 2 coloumns:
+ALTER TABLE bakery.customer_sweepstakes
+ADD COLUMN City VARCHAR(50) AFTER Street, 
+ADD COLUMN State VARCHAR(50) AFTER City 
+;
+
+#Now we need to add the data into the coloumns 
+
+UPDATE bakery.customer_sweepstakes        #populate street coloumn 
+SET Street = SUBSTRING_INDEX(address,',',1)
+;
+
+UPDATE bakery.customer_sweepstakes
+SET City = SUBSTRING_INDEX(SUBSTRING_INDEX(address,',',2),',',-1)  #populate city coloumn 
+;
+
+UPDATE bakery.customer_sweepstakes
+SET State = SUBSTRING_INDEX(address,',',-1) ;    ##populate state coloumn 
+
+SELECT *
+FROM bakery.customer_sweepstakes;   #check coloumns have been populated properly 
+
+#FORMAT STATE COLOUMN TO BE CONSISTENT all uppercase
+
+SELECT state, UPPER(state)
+FROM bakery.customer_sweepstakes;
+
+Update bakery.customer_sweepstakes
+SET state = UPPER(state) ; 
+
+# FORMAT CITY coloumn to REMOVE WHITE SPACE 
+
+SELECT City, TRIM(City)
+FROM bakery.customer_sweepstakes;
+
+Update bakery.customer_sweepstakes
+SET City = TRIM(City) ; 
+
