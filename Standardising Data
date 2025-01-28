@@ -1,0 +1,60 @@
+# Second step in data cleaning proccess is to stanardise our data
+#MySQL provides a variety of string functions that you can use to standardize the format of your data. 
+#For example, you can use the LOWER() or UPPER() functions to convert text to lower or upper case, the TRIM() function to remove leading and trailing whitespace, and the DATE_FORMAT() function to standardize the format of date values.
+
+SELECT phone, REGEXP_REPLACE(phone, '[()-/+]','')  #Can add any characters between '' to remove from a list
+FROM bakery.customer_sweepstakes ;  
+
+# Now to replace the table with the new numbers 
+
+UPDATE bakery.customer_sweepstakes
+SET phone = REGEXP_REPLACE(phone, '[()-/+]','')
+;
+
+#However we should include a '-' in our new format and this can  be done using SUBSTRING  and CONCAT 
+# STEP 1 Standardise phone numbers 
+
+SELECT phone, CONCAT(SUBSTRING(phone,1,3),'-',SUBSTRING(phone,4,3),'-',SUBSTRING(phone,7,4))
+FROM bakery.customer_sweepstakes
+WHERE phone <> '' ;  
+
+UPDATE bakery.customer_sweepstakes
+SET phone = CONCAT(SUBSTRING(phone,1,3),'-',SUBSTRING(phone,4,3),'-',SUBSTRING(phone,7,4))
+WHERE phone<> '' ; 
+
+#Standardising Dates
+# Firslty we need to ensure that the coloumn is not a text datatype and instead set to date data type
+# we do this by using STR_TO_DATE
+
+# had issues with 2 dates which were formatted in reverse so targetting them first by using substring to break down dates 
+
+SELECT birth_date, SUBSTRING(birth_date, 9,2),SUBSTRING(birth_date, 6,2),SUBSTRING(birth_date, 1,4)
+FROM bakery.customer_sweepstakes ;
+
+SELECT birth_date, CONCAT(SUBSTRING(birth_date, 9,2),'/',SUBSTRING(birth_date, 6,2),'/',
+SUBSTRING(birth_date, 1,4))
+FROM bakery.customer_sweepstakes ;
+
+#Updated the table to edit these 2 tricky dates first and used 'sweepstake_ID' to specify them
+
+UPDATE bakery.customer_sweepstakes 
+SET birth_date = CONCAT(SUBSTRING(birth_date, 9,2),'/',SUBSTRING(birth_date, 6,2),'/',
+SUBSTRING(birth_date, 1,4)) 
+WHERE sweepstake_id IN (9,11) 
+
+# Now can format rest of dates easily from Text to string and in below format Y/M/D
+
+UPDATE bakery.customer_sweepstakes
+SET birth_date = STR_TO_DATE(birth_date,'%Y/%m/%d')
+
+#STANDARDISING YES or NO coloumns 
+
+SELECT `Are you over 18?`,         # SELECT coloumn with Y/N question and use a CASE statement 
+CASE
+WHEN `Are you over 18?` = 'Yes' THEN 'Y'
+WHEN `Are you over 18?` = 'No' THEN 'N'
+ELSE `Are you over 18?`                        #Need an ELSE for answers that are already Y/N 
+END 
+AS Formatted 
+FROM bakery.customer_sweepstakes;
+
