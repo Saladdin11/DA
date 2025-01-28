@@ -1,0 +1,19 @@
+#NULL values differ from blank rows as Nulls are not counted when using COUNT functions and so Nulls do not effect Averages as would Blanks which would be counted in a COUNT Function
+
+#Update Tables to change blank '' to NULL so that our counts and averages are not effected in our analysis 
+UPDATE bakery.customer_sweepstakes
+SET phone = NULL
+WHERE phone = '' 
+
+#THere are special functions you can use when working with NULL values 
+
+# Things to consider when working with NULL values 
+# - can we keep records that dont have this value? / is the value important? if no just delete it 
+# - can we populate this data? can we derive this field from another field or other table? 
+# - cam we populate it with an average? / Can we use Imputation models? 
+
+#One of the special functions we can use with NULL values is COALESCE
+
+SELECT AVG(COALESCE(income,0))        #This asks sql to use the null values and replace them with 0 when calc avg
+FROM bakery.customer_sweepstakes
+
